@@ -1,5 +1,8 @@
+import Link from "next/link";
 import SignupModal from "@/components/SignupModal";
 import DemoCard from "@/components/DemoCard";
+import Mimo from "@/components/Mimo";
+
 const steps = [
   {
     emoji: "📝",
@@ -22,6 +25,9 @@ export default function Home() {
   return (
     <main className="mx-auto w-full max-w-[800px] px-4">
       <section className="py-12 text-center sm:py-16">
+        <Link href="/mascot" aria-label="Meet Mimo, our mascot" className="inline-block">
+          <Mimo className="mb-6 size-40 sm:size-48" />
+        </Link>
         <h1 className="text-4xl leading-tight sm:text-5xl">
           Learn a new word every day.
           <br />

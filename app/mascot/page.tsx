@@ -36,8 +36,8 @@ export default function MascotPage() {
         </p>
       </section>
 
-      <section className="mt-10">
-        <Mimo />
+      <section className="mt-10 rounded-3xl border-2 border-border shadow-[0_6px_0_var(--border)]">
+        <Mimo className="h-80 w-full py-4 sm:h-96" />
       </section>
 
       <section className="mt-16">
