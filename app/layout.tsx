@@ -1,30 +1,36 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Montserrat } from "next/font/google";
+import { Madimi_One } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const madimiOne = Madimi_One({
+  weight: "400",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Memo — Practice English Every Day",
-  description:
-    "Build your English vocabulary one word at a time. Save meanings, explore example sentences, and practice with random quizzes.",
+  title: "Memo",
 };
+
+// Runs before paint so the saved (or system) theme applies without a flash.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${madimiOne.className} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="flex min-h-full flex-col bg-background text-foreground">
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
