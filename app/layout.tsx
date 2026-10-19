@@ -9,8 +9,28 @@ const madimiOne = Madimi_One({
   subsets: ["latin"],
 });
 
+const description =
+  "Learn a new word every day and actually remember it. Save the words you learn, and Memo quizzes you until they stick.";
+
 export const metadata: Metadata = {
-  title: "Memo",
+  metadataBase: new URL("https://memo-zeta-rust.vercel.app"),
+  title: {
+    default: "Memo – Learn a new word every day",
+    template: "%s | Memo",
+  },
+  description,
+  openGraph: {
+    title: "Memo – Learn a new word every day",
+    description,
+    siteName: "Memo",
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Memo – Learn a new word every day",
+    description,
+  },
 };
 
 // Runs before paint so the saved (or system) theme applies without a flash.

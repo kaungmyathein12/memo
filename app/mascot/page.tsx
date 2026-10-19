@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Mimo from "@/components/Mimo";
 
 export const metadata: Metadata = {
-  title: "Mascot | Memo",
+  title: "Mascot",
 };
 
 const reasons = [

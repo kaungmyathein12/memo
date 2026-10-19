@@ -1,3 +1,5 @@
+import type { ComponentProps } from "react";
+
 // Mimo, Memo's lazy hippo mascot. Flat, boxy shapes with a solid drop
 // shadow (the same "3D" trick as our buttons).
 const colors = {
@@ -10,13 +12,20 @@ const colors = {
 
 const line = { stroke: colors.ink, strokeWidth: 6, strokeLinejoin: "round" as const };
 
-export default function Mimo({ className = "" }: { className?: string }) {
+type MimoProps = ComponentProps<"svg"> & {
+  // The OG image renderer can't draw SVG <text>, so it hides this and
+  // overlays the card text itself.
+  showCardText?: boolean;
+};
+
+export default function Mimo({ className = "", showCardText = true, ...props }: MimoProps) {
   return (
     <svg
       viewBox="0 0 400 400"
       role="img"
       aria-label="Mimo the hippo holding a word card."
       className={`mx-auto block ${className}`}
+      {...props}
     >
       <defs>
         <filter id="mimo-lift" x="-10%" y="-10%" width="120%" height="125%">
@@ -29,7 +38,7 @@ export default function Mimo({ className = "" }: { className?: string }) {
           </feMerge>
         </filter>
       </defs>
-      <rect x="104" y="368" width="192" height="16" rx="8" className="fill-accent/15" />
+      <rect x="104" y="368" width="192" height="16" rx="8" fill="rgba(21, 128, 61, 0.15)" className="fill-accent/15" />
       <g filter="url(#mimo-lift)">
         {/* sprout */}
         <rect x="196" y="28" width="8" height="40" rx="4" fill={colors.leaf} {...line} />
@@ -55,9 +64,11 @@ export default function Mimo({ className = "" }: { className?: string }) {
         <rect x="138" y="246" width="124" height="80" rx="26" fill={colors.belly} />
         {/* word card and arms */}
         <rect x="156" y="258" width="88" height="62" rx="12" fill="#fff" {...line} />
-        <text x="200" y="301" textAnchor="middle" fontSize="30" fill="#15803d">
-          Aa
-        </text>
+        {showCardText && (
+          <text x="200" y="301" textAnchor="middle" fontSize="30" fill="#15803d">
+            Aa
+          </text>
+        )}
         <rect x="138" y="270" width="32" height="36" rx="13" fill={colors.skin} {...line} />
         <rect x="230" y="270" width="32" height="36" rx="13" fill={colors.skin} {...line} />
         {/* head */}
